@@ -1,4 +1,5 @@
-use super::actions::{self, Attacks};
+use super::actions::{self, Attacks, Defenses};
+use super::dice::GenericDice;
 
 #[derive(Debug, PartialEq, Copy, Clone)]
 pub enum Status {
@@ -95,5 +96,31 @@ impl GenericCharacter {
       40..=100 => self.condition = Condition::Well,
       _ => self.condition = Condition::Well,
     }
+  }
+}
+
+
+impl Attacks for GenericCharacter {
+  fn basic_attack(&mut self) -> u16{
+    let damage = self.get_strength();
+    damage
+  }
+
+  fn special_attack(&mut self) -> u16 {
+    let dice: GenericDice = GenericDice::new(6);
+    // TODO: como pegar esse u8 e transformar num u16 só pra essa conta? 
+    let damage = self.get_strength() + (self.get_max_health() * dice.roll() as u16);
+
+    damage
+  }
+}
+
+impl Defenses for GenericCharacter {
+  fn block(&mut self) {
+      
+  }
+
+  fn dodge(&mut self) {
+      
   }
 }

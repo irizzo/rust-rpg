@@ -1,7 +1,7 @@
 pub trait Attacks{
-  fn basic_attack(&mut self);
+  fn basic_attack(&mut self) -> u16;
 
-  fn special_attack(&mut self);
+  fn special_attack(&mut self) -> u16;
 }
 
 // TODO: Efeitos que um ataque pode ter?
@@ -21,10 +21,10 @@ pub trait Attacks{
 
 // }
 
-pub trait Defense {
+pub trait Defenses {
   // esquiva
-  fn dodge();
+  fn dodge(&mut self);
 
   // bloqueio
-  fn block();
+  fn block(&mut self);
 }
