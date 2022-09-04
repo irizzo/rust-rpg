@@ -1,4 +1,4 @@
-use super::actions::{self, Attacks, Defenses};
+use super::actions::{Attacks, Defenses};
 use super::dice::GenericDice;
 
 #[derive(Debug, PartialEq, Copy, Clone)]
@@ -27,15 +27,15 @@ pub struct GenericCharacter {
 }
 
 impl GenericCharacter {
-    pub fn new(h: u16, max_h: u16, s: u16, d: u16, st: Status, c: Condition, n: String) -> GenericCharacter {
+  pub fn new(health: u16, strength: u16, defense: u16, name: String) -> GenericCharacter {
     GenericCharacter {
-      health: h,
-      max_health: max_h,
-      strength: s,
-      defense: d,
-      status: st,
-      condition: c,
-      name: n
+      health,
+      max_health: health,
+      strength,
+      defense,
+      status: Status::Alive,
+      condition: Condition::Well,
+      name,
     }
   }
 
@@ -107,20 +107,39 @@ impl Attacks for GenericCharacter {
   }
 
   fn special_attack(&mut self) -> u16 {
-    let dice: GenericDice = GenericDice::new(6);
+    let d6: GenericDice = GenericDice::new(6);
     // TODO: como pegar esse u8 e transformar num u16 só pra essa conta? 
-    let damage = self.get_strength() + (self.get_max_health() * dice.roll() as u16);
-
+    let damage = self.get_strength() + (self.get_max_health() * d6.roll() as u16) / 10;
+    print!("special attack damage");
+    println!("{}", damage);
     damage
   }
 }
 
 impl Defenses for GenericCharacter {
-  fn block(&mut self) {
-      
+  fn block(&mut self) -> u16 {
+    let d20: GenericDice = GenericDice::new(20);
+    let roll = d20.roll();
+
+    let blocked_damage;
+
+    if roll >= 10 {
+      blocked_damage = self.get_defense() * roll as u16;
+    } else {
+      blocked_damage = 0;
+    }
+
+    blocked_damage
   }
 
-  fn dodge(&mut self) {
-      
+  fn dodge(&mut self) -> bool{
+    let d20: GenericDice = GenericDice::new(20);
+    let roll = d20.roll();
+
+    if roll >= 10 {
+      true
+    } else {
+      false
+    }
   }
 }

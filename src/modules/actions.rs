@@ -1,4 +1,7 @@
+use super::character::GenericCharacter;
+
 pub trait Attacks{
+  // TODO: passar inimigo
   fn basic_attack(&mut self) -> u16;
 
   fn special_attack(&mut self) -> u16;
@@ -23,8 +26,8 @@ pub trait Attacks{
 
 pub trait Defenses {
   // esquiva
-  fn dodge(&mut self);
+  fn dodge(&mut self) -> bool ;
 
   // bloqueio
-  fn block(&mut self);
+  fn block(&mut self) -> u16;
 }
