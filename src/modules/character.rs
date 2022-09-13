@@ -8,7 +8,7 @@ pub enum Status {
   Disabled
 }
 
-#[derive(Debug, PartialEq, Copy, Clone)]
+#[derive(Debug, Copy, Clone)]
 pub enum Condition {
   Well, // (100% a 40%)
   Hurt, // (39% a 10%)
@@ -108,7 +108,6 @@ impl Attacks for GenericCharacter {
 
   fn special_attack(&mut self) -> u16 {
     let d6: GenericDice = GenericDice::new(6);
-    // TODO: como pegar esse u8 e transformar num u16 só pra essa conta? 
     let damage = self.get_strength() + (self.get_max_health() * d6.roll() as u16) / 10;
     print!("special attack damage");
     println!("{}", damage);
