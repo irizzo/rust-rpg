@@ -1,7 +1,7 @@
 use rand::Rng;
+use std::cmp::Ordering;
 
-pub struct GenericDice { 
-	// TODO: como colocar os valores de range num enum ou algo assim? pra já tê-los definidos
+pub struct GenericDice {
 	range: u8
 }
 
@@ -19,5 +19,17 @@ impl GenericDice {
 	pub fn roll(&self) -> u8 {
 		let mut rng = rand::thread_rng();
 		rng.gen_range(0..=self.get_range())
+	}
+}
+
+impl PartialEq for GenericDice {
+	fn eq(&self, other: &Self) -> bool {
+		self.get_range() == other.get_range()
+	}
+}
+
+impl PartialOrd for GenericDice {
+	fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+		self.range.partial_cmp(&other.range)
 	}
 }

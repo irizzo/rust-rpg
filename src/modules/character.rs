@@ -1,7 +1,8 @@
+use std::cmp::Ordering;
 use super::actions::{Attacks, Defenses};
 use super::dice::GenericDice;
 
-#[derive(Debug, PartialEq, Copy, Clone)]
+#[derive(Debug, Copy, Clone)]
 pub enum Status {
   Alive, 
   Dead,
@@ -15,7 +16,7 @@ pub enum Condition {
   Unconscious // (9% a 0%)
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct GenericCharacter {
   health: u16,
   max_health: u16,
@@ -99,6 +100,21 @@ impl GenericCharacter {
   }
 }
 
+impl PartialEq for GenericCharacter {
+  fn eq(&self, other: &Self) -> bool {
+    self.get_name() == other.get_name()
+  }
+}
+
+impl PartialOrd for GenericCharacter{
+  fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+    self.max_health.partial_cmp(&other.max_health)
+  }
+  
+  fn ge(&self, other: &Self) -> bool {
+    self.max_health >= other.max_health
+  }
+}
 
 impl Attacks for GenericCharacter {
   fn basic_attack(&mut self) -> u16{
