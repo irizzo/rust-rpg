@@ -18,7 +18,7 @@ impl GenericDice {
 
 	pub fn roll(&self) -> u8 {
 		let mut rng = rand::thread_rng();
-		rng.gen_range(0..=self.get_range())
+		rng.gen_range(1..=self.get_range())
 	}
 }
 

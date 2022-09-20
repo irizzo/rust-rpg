@@ -7,23 +7,6 @@ pub trait Attacks{
   fn special_attack(&mut self) -> u16;
 }
 
-// TODO: Efeitos que um ataque pode ter?
-// pub enum AttackEffect {
-//   Stun,
-//   Poison
-// }
-
-// TODO: O que um ataque tem (dano, efeito, etc...)
-// pub struct AttacksStruct {
-//   damage: u16,
-//   effect: String,
-// }
-
-// TODO: função para lidar com um ataque, quando receber um ataque
-// pub fn handleAttackEffect(attack: AttacksStruct) {
-
-// }
-
 pub trait Defenses {
   // esquiva
   fn dodge(&mut self) -> bool ;
@@ -31,3 +14,10 @@ pub trait Defenses {
   // bloqueio
   fn block(&mut self) -> u16;
 }
+
+// TODO: no futuro, implementar skills genéricas, porém não sei como fazer ainda
+// pub struct Skill {
+//   name: String,
+//   effect_name: String, // TODO: criar enum de efeitos de skills (Stun, Poison, Cure)
+//   effect_factor: i8,
+// }
