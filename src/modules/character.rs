@@ -125,7 +125,7 @@ impl GenericCharacter {
     }
   }
 
-  pub fn handleDamage(&mut self, rcvd_damage: u16) {
+  pub fn handle_damage(&mut self, rcvd_damage: u16) {
     // se o damage for maior que a vida restante, então a vida restante é 0.
     if rcvd_damage >= self.get_health() {
       self.set_health(0);
@@ -194,7 +194,7 @@ impl Defenses for GenericCharacter {
   fn dodge(&mut self) -> bool {
     let d20: GenericDice = GenericDice::new(20);
     let roll = d20.roll();
-    
+
     if roll >= d20.get_range()/2 {
       true
     } else {

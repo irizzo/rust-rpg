@@ -52,7 +52,7 @@ pub mod testes {
 
     let dano = cavaleiro.basic_attack();
 
-    inimigo.handleDamage(dano);
+    inimigo.handle_damage(dano);
 
     let vida_inimigo = inimigo.get_health();
 
@@ -74,7 +74,7 @@ pub mod testes {
       dano_bruto - dano_bloqueado
     };
 
-    inimigo.handleDamage(dano_recebido);
+    inimigo.handle_damage(dano_recebido);
 
     // verificar que o inimigo só recebeu o que não bloqueou
     assert_eq!(inimigo.get_health(), inimigo.get_max_health()-&dano_recebido);
@@ -95,7 +95,7 @@ pub mod testes {
       dano_bruto
     };
 
-    inimigo.handleDamage(dano_recebido);
+    inimigo.handle_damage(dano_recebido);
 
     assert_eq!(inimigo.get_health(), inimigo.get_max_health()-&dano_recebido);
   }
